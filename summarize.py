@@ -16,11 +16,11 @@ def get_transcription(transcription_file):
 def get_chunks(tokens):
     result = []
     start = 0
-    end = CHUNK_SIZE if CHUNK_SIZE < len(tokens) else len(tokens)
+    end = min(CHUNK_SIZE, len(tokens))
     while end < len(tokens):
         result.append(tokens[start:end])
         start = end + 1
-        end = end + CHUNK_SIZE if end + CHUNK_SIZE < len(tokens) else len(tokens)
+        end = min(end + CHUNK_SIZE, len(tokens))
     return result
 
 def main(filename):
