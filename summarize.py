@@ -3,7 +3,7 @@ import json, os
 import time as t
 
 API_KEY = os.environ.get('OPEN_AI_KEY') #Enter your API key here
-PREFIX = "phone_call"
+PREFIX = "emma_chapter_1"
 FILENAME = PREFIX + ".json"
 CHUNK_SIZE = 500
 
