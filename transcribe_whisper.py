@@ -2,17 +2,18 @@ import openai
 import json, os
 import time as t
 
-API_KEY = os.environ.get('OPEN_AI_KEY')
-PREFIX = "emma_chapter_9"
-FILENAME = "../audios/" + PREFIX + ".mp3"
+API_KEY = os.environ.get('OPEN_AI_KEY') #Enter your API key here
+PREFIX = "emma_chapter_1"
+MIMETYPE = ".mp3"
+FILENAME = PREFIX + MIMETYPE
 
 def main(filename):
     start = t.time()
     
     #Initialization
     openai.api_key = API_KEY
-    print("Currently transcribing ", FILENAME)
     print()
+    print("Currently transcribing ", filename)
 
     #transcription call
     audio_file = open(filename, "rb")
@@ -20,7 +21,7 @@ def main(filename):
     json_object = json.dumps(transcript, indent=4)
 
     #write results
-    transcrption_file = './whisper_results/' + PREFIX + ".json"
+    transcrption_file = PREFIX + ".json"
     with open(transcrption_file, "w") as outfile:
         outfile.write(json_object)
 
