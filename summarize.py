@@ -2,9 +2,9 @@ import openai
 import json, os
 import time as t
 
-API_KEY = os.environ.get('OPEN_AI_KEY')
+API_KEY = os.environ.get('OPEN_AI_KEY') #Enter your API key here
 PREFIX = "phone_call"
-FILENAME = "./whisper_results/" + PREFIX + ".json"
+FILENAME = PREFIX + ".json"
 CHUNK_SIZE = 500
 
 def get_transcription(transcription_file):
@@ -36,12 +36,10 @@ def main(filename):
 
     chunks = get_chunks(tokens)
 
-    # Count tokens: Token package (Sandra) - tiktoken
-    # Example prompt: Give an example body and output for a summary!! Absolutely flawless!!!!!
-
-    transcrption_file = './summaries/' + PREFIX + "c" + ".txt"
+    transcrption_file = PREFIX + ".txt"
     with open(transcrption_file, "w") as outfile:
         for chunk in chunks:
+            # `content` contains the prompt we're using to summarize. Feel free to modify it as you deem fit.
             content = "Summarize the following text in thirty words or fewer: " + ' '.join(chunk)
             json_response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo",
